@@ -1,8 +1,103 @@
 #include <iostream>
 #include "configuration.h"
+#include "game.h"
+#include "player.h"
+#include "computer.h"
+#include <stdio.h>
 
 
 
+int main () {
+	
+
+	std::cout << "start" << std::endl;
+	int game_type=1;
+
+	Game* game;
+	Configuration* initial_state;
+	Player* human_player_one;
+	Player* human_player_two;
+	//Computer* computer_player;
+	//what kind of game 
+
+	printf("What kind of game do you want to play?\n\nEnter 1 for Human vs. Human\nEnter 2 for Human vs. AI\n");
+		scanf("%i", &game_type);
+
+
+	while (game_type < 1 || game_type > 2){
+		printf("Wrong game type\nWhat kind of game do you want to play?\n\nEnter 1 for Human vs. Human\nEnter 2 for Human vs. AI\n");
+		scanf("%i", &game_type);
+
+	}
+
+
+
+	if (game_type == 1){
+
+		//std::cout << "making player one" << std::endl;
+		human_player_one = new Player('A');
+		//std::cout << "making player two" << std::endl;
+		human_player_two = new Player('B');
+		//create the initial configuration object with the empty board and the maximizing player
+		//std::cout << "making state" << std::endl;
+		initial_state = new Configuration();
+		//std::cout << "making game pointer" << std::endl;
+		game = new Game(human_player_one, human_player_two, initial_state);
+		game->play_game();
+		delete human_player_one;
+		delete human_player_two;
+		delete initial_state;
+		delete game;
+	}
+	
+	else {
+		human_player_one = new Player('A');
+		//Computer* computer_player = new Computer('B');
+		initial_state = new Configuration();
+		//Game* = new Game(human_player_one, computer_player, initial_state);
+		game->play_game();
+		/*
+		delete human_player_one;
+		delete computer_player;
+		delete initial_state;
+		delete game;*/
+	}
+
+	//initial_state->print_configuration();
+	
+
+
+
+
+	//declare the game pointer object
+
+
+	
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+	
+
+	//we want to make a move as the first player
+
+
+
+
+
+
+	return 0;
+}
 
 /*
 
@@ -28,39 +123,3 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
 18                  break (* α cut-off *)
 19          return v
 */
-
-
-
-
-int main () {
-
-
-	//main objects that we will need:
-
-	//nodes
-
-	//connect 4 board - char**
-
-	//create an initial configuration
-
-
-
-
-	char human_player = 'h';
-	char computer_player = 'c';
-
-
-
-	//create the initial configuration object with the empty board and the maximizing player
-	Configuration initial_state(human_player);
-
-	//we want to make a move as the first player
-
-	printf("The");
-
-
-
-
-
-	return 0;
-}

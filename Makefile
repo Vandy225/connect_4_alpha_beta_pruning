@@ -1,16 +1,19 @@
 CCC = g++
 
 CCCFLAGS = -Wall -g -std=c++11 -lpthread -lX11
+
+DEPS = main.o configuration.o player.o computer.o game.o
+
 all : main
 
-main : configuration.o main.o
+main : $(DEPS)
 	$(CCC) $(CCCFLAGS) -o $@ $^
 
 %.o : %.cc
-	$(CCC) -c $(CCCFLAGS) $<
+	$(CCC) $(CCCFLAGS) -c $<
 
 clean:
-	rm -f *.o *~ *% *# .#*
+	rm -f *.o *~ *% *# .#* main
 
 clean-all: clean
 	rm -f main
