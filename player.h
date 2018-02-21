@@ -18,7 +18,7 @@ public:
 	char get_token();
 	
 
-private:
+protected:
 	char token;
 
 

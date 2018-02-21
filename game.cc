@@ -38,7 +38,7 @@ void Game::play_game(){
 	std::cout << "Player " << this->current_player->get_token() << " Won!\n";
 	this->state->print_configuration();
 
-
+return;
 
 }
 

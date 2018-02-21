@@ -17,6 +17,7 @@ int main () {
 	Configuration* initial_state;
 	Player* human_player_one;
 	Player* human_player_two;
+	Player* computer_player;
 	//Computer* computer_player;
 	//what kind of game 
 
@@ -51,16 +52,16 @@ int main () {
 	}
 	
 	else {
-		human_player_one = new Player('A');
-		//Computer* computer_player = new Computer('B');
 		initial_state = new Configuration();
-		//Game* = new Game(human_player_one, computer_player, initial_state);
+		human_player_one = new Player('A');
+		Player* computer_player = new Computer(initial_state,'B');
+		game = new Game(human_player_one, computer_player, initial_state);
 		game->play_game();
-		/*
+		
 		delete human_player_one;
 		delete computer_player;
 		delete initial_state;
-		delete game;*/
+		delete game;
 	}
 
 	//initial_state->print_configuration();

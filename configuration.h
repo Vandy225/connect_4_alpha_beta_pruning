@@ -20,7 +20,7 @@ public:
 
 	//overloaded =operator
 
-	Configuration& operator=(const Configuration&);
+	Configuration operator=(const Configuration&);
 
 	//function to modify the board state
 	void modify_board(int position, char token);
@@ -32,6 +32,13 @@ public:
 
 	bool not_out_of_bounds(int x, int y);
 
+	int get_most_recent_x();
+	int get_most_recent_y();
+	char get_token();
+
+	int utility();
+
+	bool full_board();
 
 
 protected:

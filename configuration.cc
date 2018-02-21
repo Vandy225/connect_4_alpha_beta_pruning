@@ -34,7 +34,7 @@ Configuration::~Configuration(){
 void Configuration::modify_board(int position, char token){
 	for(int r = 5; r >=0; r--){
 		if (this->game_board[r][position] == ' '){
-			std::cout << "Placing at r= " << r << " c= " << position << std::endl;
+			//std::cout << "Placing at r= " << r << " c= " << position << std::endl;
 			this->game_board[r][position] = token;
 			this->most_recent_x = r;
 			this->most_recent_y = position;
@@ -87,14 +87,17 @@ bool Configuration::is_valid(int y_position){
 	}
 }
 
-Configuration& Configuration::operator=(const Configuration& right_operand){
+Configuration Configuration::operator=(const Configuration& right_operand){
 	
+	Configuration returned;
+
 	for(int i=0; i < 6; i++){
 		for (int j=0; j < 7; j++){
-			this->game_board[i][j] = right_operand.game_board[i][j];
+			returned.game_board[i][j] = right_operand.game_board[i][j];
 		}
 	}
 
+	return returned;
 }
 
 bool Configuration::game_over(){
@@ -121,7 +124,7 @@ bool Configuration::game_over(){
 		if(not_out_of_bounds(search_x, search_y) && this->game_board[search_x][search_y] == token){
 			num_in_a_row++;
 			//going up
-			std::cout << search_x << " " << search_y << "\n";
+			//std::cout << search_x << " " << search_y << "\n";
 			search_x--;
 			
 		}
@@ -137,7 +140,7 @@ bool Configuration::game_over(){
 		}
 	}
 	if(num_in_a_row >= 4){
-		std::cout << "win!\n";
+		//std::cout << "win!\n";
 		return true;
 	}
 	//start again, check left/right
@@ -234,4 +237,79 @@ bool Configuration::not_out_of_bounds(int x, int y){
 	else {
 		return true;
 	}
+}
+
+int Configuration::get_most_recent_x(){
+	return this->most_recent_x;
+}
+int Configuration::get_most_recent_y(){
+	return this->most_recent_y;
+}
+
+char Configuration::get_token(){
+	return this->most_recent_token;
+}
+
+/*
+
+//utility function based on how many lines of length 4 can be made through it
+int Configuration::utility(){
+
+	int evaluation_table[6][7] =
+	{{3, 4, 5, 7, 5, 4, 3}, 
+	{4, 6, 8, 10, 8, 6, 4},
+    {5, 8, 11, 13, 11, 8, 5}, 
+    {5, 8, 11, 13, 11, 8, 5},
+    {4, 6, 8, 10, 8, 6, 4},
+    {3, 4, 5, 7, 5, 4, 3}};
+
+    int utility = 138;
+    int space_score=0;
+
+    for (int i = 0; i < 6; i++){
+    	for (int j =0; j < 7; j++){
+    		if (this->game_board[i][j] == 'A'){
+    			space_score += evaluation_table[i][j];
+    		}
+    		if (this->game_board[i][j] == 'B'){
+    			space_score -= evaluation_table[i][j];
+    		}
+    	}
+    }
+
+    return utility+space_score;
+
+
+}*/
+
+int Configuration::utility(){
+	//if the first player won, return 1
+	if(this->game_over() && this->most_recent_token == 'A'){
+		return 1;
+	}
+	//if the second player won, return -1
+	else if (this->game_over() && this->most_recent_token == 'B'){
+		return -1;
+
+	}
+	//if it is a draw
+	else if (this->full_board()){
+		return 0;
+	}
+}
+
+bool Configuration::full_board(){
+
+
+for (int i=0; i < 7; i++){
+	if(this->game_board[0][i] == ' '){
+		return false;
+	}
+	else{
+		return true;
+	}
+	
+
+}	
+
 }
