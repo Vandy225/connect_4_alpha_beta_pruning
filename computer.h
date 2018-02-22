@@ -14,17 +14,16 @@ public:
 	~Computer();
 	//lets the computer pick a spot
 	int make_move();
-	//the minimax function with alpha-beta pruning
 
 
 private:
 
+	//member 
 	Configuration* game_board;
 
-	int turn_number=0;
-	
-
-int alpha_beta(Configuration game_board, int depth, int alpha, int beta, bool maximizingPlayer);
+	int turn_number=1;
+	//private helper function for 
+	int alpha_beta(Configuration game_board, int depth, int alpha, int beta, bool current_player);
 
 
 

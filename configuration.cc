@@ -2,14 +2,6 @@
 
 //configuration constructor
 Configuration::Configuration(){
-
-	//std::cout << "constructing a configuration" << std::endl;
-
-	//assign the pointers for the board
-	/*for (int i=0; i < 6; i++){
-		this->game_board[i] = new char[7];
-	}*/
-
 		//initialize the members of the game_board object to all 0's
 		for(int i =0; i < 6; i++){
 			//std::cout << "working on row " << i <<"\n";
@@ -57,9 +49,6 @@ void Configuration::print_configuration(){
 			for(int j=0; j < 7; j++){
 				printf("|");
 				printf("%c", this->game_board[i][j]);
-				
-
-
 
 			}
 			printf("|");
@@ -87,22 +76,28 @@ bool Configuration::is_valid(int y_position){
 	}
 }
 
+
+//
 Configuration Configuration::operator=(const Configuration& right_operand){
 	
+	//temp to hold returned board	
 	Configuration returned;
 
+	//iterate through elements and set
 	for(int i=0; i < 6; i++){
 		for (int j=0; j < 7; j++){
 			returned.game_board[i][j] = right_operand.game_board[i][j];
 		}
 	}
-
+	//hand back the new board
 	return returned;
 }
 
 bool Configuration::game_over(){
 
 
+	//declare some local variables derived from the Configuration object for iterating through lines
+	//we want to know the location of the most recent move, denoted with last_x and last_y
 	int last_x = this->most_recent_x;
 	int last_y = this->most_recent_y;
 	char token = this->most_recent_token;
@@ -110,11 +105,11 @@ bool Configuration::game_over(){
 	//first, lets search up/down, left, right
 
 
-	//our searching 
+	//variables to iterate through lines
 	int search_x = last_x;
 	int search_y = last_y;
 
-	//always have 1 to start
+	//start with none in a row
 	int num_in_a_row = 0;
 
 	
@@ -124,7 +119,6 @@ bool Configuration::game_over(){
 		if(not_out_of_bounds(search_x, search_y) && this->game_board[search_x][search_y] == token){
 			num_in_a_row++;
 			//going up
-			//std::cout << search_x << " " << search_y << "\n";
 			search_x--;
 			
 		}
@@ -135,7 +129,7 @@ bool Configuration::game_over(){
 	for(int i =0; i < 3; i++){
 		if(not_out_of_bounds(search_x, search_y) && this->game_board[search_x][search_y] == token){
 			num_in_a_row++;
-			//going up
+			//going down
 			search_x++;
 		}
 	}
@@ -196,7 +190,7 @@ bool Configuration::game_over(){
 		return true;
 	}
 
-	//start again, check rightdiagonal
+	//start again, check right diagonal
 	num_in_a_row =0;
 	search_x = last_x;
 	search_y = last_y;
@@ -285,19 +279,23 @@ int Configuration::utility(){
 int Configuration::utility(){
 	//if the first player won, return 1
 	if(this->game_over() && this->most_recent_token == 'A'){
+		//std::cout << "returned 1" << std::endl;
 		return 1;
 	}
 	//if the second player won, return -1
 	else if (this->game_over() && this->most_recent_token == 'B'){
+		//std::cout << "returned -1" << std::endl;
 		return -1;
 
 	}
 	//if it is a draw
 	else if (this->full_board()){
+		//std::cout << "returned 0" << std::endl;
 		return 0;
 	}
 }
 
+//function that checks to see if 
 bool Configuration::full_board(){
 
 
@@ -305,11 +303,11 @@ for (int i=0; i < 7; i++){
 	if(this->game_board[0][i] == ' '){
 		return false;
 	}
-	else{
-		return true;
-	}
-	
-
+	//else{
+	//	return true;
+	//}
 }	
+
+return true;
 
 }

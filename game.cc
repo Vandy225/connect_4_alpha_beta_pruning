@@ -13,6 +13,7 @@ Game::Game(Player* player_one, Player* player_two, Configuration* initial_state)
 }
 
 void Game::play_game(){
+	//start with player 1
 	this->current_player = player_one;
 
 	while(!player_turn()){
