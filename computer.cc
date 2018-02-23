@@ -175,6 +175,7 @@ int Computer::alpha_beta(Configuration game_board, int depth, int alpha, int bet
 			}
 			//if value is greater than beta, min won't let us choose the move. Prune.
 			if( value >= beta){
+				return value;
 				break;
 			}
 			//else keep going
@@ -204,6 +205,7 @@ int Computer::alpha_beta(Configuration game_board, int depth, int alpha, int bet
 			}
 			//if the value is less than alpha, max won't choose it. Prune
 			if( value <= alpha){
+				return value;
 				break;
 			}
 			//else keep going
