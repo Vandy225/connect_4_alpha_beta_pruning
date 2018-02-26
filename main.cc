@@ -1,3 +1,13 @@
+//-------------------------------------------------
+//Course: CPSC 3750
+//Instructor: Yllias Chali
+//Assessment: Assignment 2
+//Name: Joshua Vandenhoek
+//ID: 001142936
+//Date: February 12, 2018
+//-------------------------------------------------
+
+
 //-- Main program file
 
 #include <iostream>
